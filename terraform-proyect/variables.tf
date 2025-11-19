@@ -15,14 +15,56 @@ variable "zone" {
   default     = "southamerica-east1-a"
 }
 
+
+
+#########################################
+# VARIABLES DE LA MÁQUINA VIRTUAL
+#########################################
+
+variable "vm_name" {
+  description = "Nombre de la instancia"
+  type        = string
+  default     = "monitoreo1"
+}
+
 variable "machine_type" {
   description = "Tipo de máquina"
   type        = string
   default     = "e2-medium"
 }
 
-variable "vm_name" {
-  description = "Nombre de la máquina virtual"
+variable "boot_image" {
+  description = "Imagen del SO para el disco de arranque"
   type        = string
-  default     = "monitoreo-prueba"
+  default     = "debian-cloud/debian-12"
 }
+
+variable "boot_disk_size" {
+  description = "Tamaño del disco de arranque en GB"
+  type        = number
+  default     = 20
+}
+
+#########################################
+# RED / ETIQUETAS
+#########################################
+
+variable "network" {
+  description = "Red donde se conectará la VM"
+  type        = string
+  default     = "default"
+}
+
+variable "subnetwork" {
+  description = "Subred donde se conectará la VM"
+  type        = string
+  default     = null
+}
+
+variable "labels" {
+  description = "Etiquetas aplicadas a la instancia"
+  type        = map(string)
+  default     = {
+    environment = "production"
+    monitored   = "true"
+  }
